@@ -32,6 +32,7 @@ public class Usuario implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = -5806778977835507507L;
 	private UUID usuarioid;
+	private Persona persona;
 	private String username;
 	private String password;
 	//private Object authorities;
@@ -41,23 +42,15 @@ public class Usuario implements java.io.Serializable {
 	//private Set<Moneda> monedasForUsuariocambio = new HashSet<Moneda>(0);
 	//private Set<Moneda> monedasForUsuarioins = new HashSet<Moneda>(0);
 	//private Set<Monedacambio> monedacambios = new HashSet<Monedacambio>(0);
-	/**
-	 * 	private Set usuarioTokens = new HashSet(0);
-	private Set transferenciasForAutorizacionid = new HashSet(0);
-	private Set monedasForUsuarioact = new HashSet(0);
-	private Set monedasForUsuariocambio = new HashSet(0);
-	private Set transferenciasForUsuarioid = new HashSet(0);
-	private Set monedasForUsuarioins = new HashSet(0);
-	private Set monedacambios = new HashSet(0);
-	private Set usuarioRols = new HashSet(0);
-	 */
 	private Set<UsuarioRol> usuarioRols = new HashSet<UsuarioRol>(0);
 
 	public Usuario() {
 	}
 
-	public Usuario(UUID usuarioid,  String username,String password, short activo) {
+	public Usuario(UUID usuarioid,  Persona persona, String username,
+			String password, short activo) {
 		this.usuarioid = usuarioid;
+		this.persona = persona;
 		this.username = username;
 		this.password = password;
 		this.activo = activo;
@@ -67,6 +60,7 @@ public class Usuario implements java.io.Serializable {
 			String password, short activo, Set<Transferencia> transferencias, Set<Moneda> monedasForUsuarioact, Set<Moneda> monedasForUsuariocambio,
 			 Set<Moneda> monedasForUsuarioins, Set<Monedacambio> monedacambios, Set<UsuarioRol> usuarioRols) {
 		this.usuarioid = usuarioid;
+		this.persona = persona;
 		this.username = username;
 		this.password = password;
 		this.activo = activo;
@@ -88,6 +82,16 @@ public class Usuario implements java.io.Serializable {
 		this.usuarioid = usuarioid;
 	}
 
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "personaid", nullable = false)
+	public Persona getPersona() {
+		return this.persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
 
 	public String getUsername() {
 		return this.username;
@@ -177,72 +181,5 @@ public class Usuario implements java.io.Serializable {
 	public void setAuthorities(Object authorities) {
 		this.authorities = authorities;
 	}*/
-	
-	/**  Generado de nuevo Usuario produjo:
-	 * public Set getUsuarioTokens() {
-		return this.usuarioTokens;
-	}
-
-	public void setUsuarioTokens(Set usuarioTokens) {
-		this.usuarioTokens = usuarioTokens;
-	}
-
-	public Set getTransferenciasForAutorizacionid() {
-		return this.transferenciasForAutorizacionid;
-	}
-
-	public void setTransferenciasForAutorizacionid(Set transferenciasForAutorizacionid) {
-		this.transferenciasForAutorizacionid = transferenciasForAutorizacionid;
-	}
-
-	public Set getMonedasForUsuarioact() {
-		return this.monedasForUsuarioact;
-	}
-
-	public void setMonedasForUsuarioact(Set monedasForUsuarioact) {
-		this.monedasForUsuarioact = monedasForUsuarioact;
-	}
-
-	public Set getMonedasForUsuariocambio() {
-		return this.monedasForUsuariocambio;
-	}
-
-	public void setMonedasForUsuariocambio(Set monedasForUsuariocambio) {
-		this.monedasForUsuariocambio = monedasForUsuariocambio;
-	}
-
-	public Set getTransferenciasForUsuarioid() {
-		return this.transferenciasForUsuarioid;
-	}
-
-	public void setTransferenciasForUsuarioid(Set transferenciasForUsuarioid) {
-		this.transferenciasForUsuarioid = transferenciasForUsuarioid;
-	}
-
-	public Set getMonedasForUsuarioins() {
-		return this.monedasForUsuarioins;
-	}
-
-	public void setMonedasForUsuarioins(Set monedasForUsuarioins) {
-		this.monedasForUsuarioins = monedasForUsuarioins;
-	}
-
-	public Set getMonedacambios() {
-		return this.monedacambios;
-	}
-
-	public void setMonedacambios(Set monedacambios) {
-		this.monedacambios = monedacambios;
-	}
-
-	public Set getUsuarioRols() {
-		return this.usuarioRols;
-	}
-
-	public void setUsuarioRols(Set usuarioRols) {
-		this.usuarioRols = usuarioRols;
-	}
-
-	 */
 
 }

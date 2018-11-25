@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import io.matrixservices.core.exchange.model.Cliente;
 import javax.persistence.OneToMany;
 
 /**
@@ -31,6 +32,7 @@ public class Persona implements java.io.Serializable {
 	private Date fechaNac;
 	private short activo;
 	//private Set<Cliente> clientes = new HashSet<Cliente>(0);
+	private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 
 	public Persona() {
 	}
@@ -54,6 +56,7 @@ public class Persona implements java.io.Serializable {
 		this.fechaNac = fechaNac;
 		this.activo = activo;
 		//this.clientes = clientes;
+		this.usuarios = usuarios;
 	}
 
 	@Id
@@ -124,6 +127,13 @@ public class Persona implements java.io.Serializable {
 		this.clientes = clientes;
 	}*/
 
-	
+	@OneToMany(mappedBy = "persona")
+	public Set<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 }
